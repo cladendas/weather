@@ -12,9 +12,11 @@
 		6A89FCC7268AE18C002DD289 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A89FCC5268AE18C002DD289 /* LaunchScreen.storyboard */; };
 		6A89FCCF268AE1FB002DD289 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89FCCE268AE1FB002DD289 /* SearchViewController.swift */; };
 		6A89FCD1268B27F6002DD289 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89FCD0268B27F6002DD289 /* DetailsViewController.swift */; };
-		6A89FCD4268B2877002DD289 /* ExtensionsForSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89FCD3268B2877002DD289 /* ExtensionsForSearchViewController.swift */; };
+		6A89FCD4268B2877002DD289 /* ForSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89FCD3268B2877002DD289 /* ForSearchViewController.swift */; };
 		6A89FCD6268B3445002DD289 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89FCD5268B3445002DD289 /* CityTableViewCell.swift */; };
-		6A89FCD8268B418A002DD289 /* ExtensionsUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89FCD7268B418A002DD289 /* ExtensionsUIView.swift */; };
+		6A89FCD8268B418A002DD289 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89FCD7268B418A002DD289 /* UIView.swift */; };
+		6A89FCDB268C7387002DD289 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89FCDA268C7387002DD289 /* Weather.swift */; };
+		6A89FCE0268C813F002DD289 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89FCDF268C813F002DD289 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,9 +27,11 @@
 		6A89FCC8268AE18C002DD289 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A89FCCE268AE1FB002DD289 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		6A89FCD0268B27F6002DD289 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
-		6A89FCD3268B2877002DD289 /* ExtensionsForSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsForSearchViewController.swift; sourceTree = "<group>"; };
+		6A89FCD3268B2877002DD289 /* ForSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForSearchViewController.swift; sourceTree = "<group>"; };
 		6A89FCD5268B3445002DD289 /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
-		6A89FCD7268B418A002DD289 /* ExtensionsUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsUIView.swift; sourceTree = "<group>"; };
+		6A89FCD7268B418A002DD289 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		6A89FCDA268C7387002DD289 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		6A89FCDF268C813F002DD289 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 			isa = PBXGroup;
 			children = (
 				6A89FCBA268AE188002DD289 /* AppDelegate.swift */,
+				6A89FCDE268C7891002DD289 /* Network */,
+				6A89FCD9268C7351002DD289 /* Model */,
 				6A89FCD2268B280A002DD289 /* Extensions */,
 				6A89FCCE268AE1FB002DD289 /* SearchViewController.swift */,
 				6A89FCD5268B3445002DD289 /* CityTableViewCell.swift */,
@@ -75,10 +81,26 @@
 		6A89FCD2268B280A002DD289 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				6A89FCD3268B2877002DD289 /* ExtensionsForSearchViewController.swift */,
-				6A89FCD7268B418A002DD289 /* ExtensionsUIView.swift */,
+				6A89FCD3268B2877002DD289 /* ForSearchViewController.swift */,
+				6A89FCD7268B418A002DD289 /* UIView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6A89FCD9268C7351002DD289 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6A89FCDA268C7387002DD289 /* Weather.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6A89FCDE268C7891002DD289 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6A89FCDF268C813F002DD289 /* NetworkManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,12 +172,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A89FCD8268B418A002DD289 /* ExtensionsUIView.swift in Sources */,
+				6A89FCE0268C813F002DD289 /* NetworkManager.swift in Sources */,
+				6A89FCD8268B418A002DD289 /* UIView.swift in Sources */,
 				6A89FCBB268AE188002DD289 /* AppDelegate.swift in Sources */,
 				6A89FCCF268AE1FB002DD289 /* SearchViewController.swift in Sources */,
 				6A89FCD6268B3445002DD289 /* CityTableViewCell.swift in Sources */,
-				6A89FCD4268B2877002DD289 /* ExtensionsForSearchViewController.swift in Sources */,
+				6A89FCD4268B2877002DD289 /* ForSearchViewController.swift in Sources */,
 				6A89FCD1268B27F6002DD289 /* DetailsViewController.swift in Sources */,
+				6A89FCDB268C7387002DD289 /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,10 +32,15 @@ final class SearchViewController: UIViewController {
     }()
     
     ///Таблица с городами
-    private let citiesTableView = UITableView()
+    private let citiesTableView = UITableView.init(frame: .zero, style: UITableView.Style.grouped)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        citiesTableView.register(CityTableViewCell.self, forCellReuseIdentifier: "CityTableViewCell")
+        
+        citiesTableView.estimatedRowHeight = 85.0
+        citiesTableView.rowHeight = UITableView.automaticDimension
         
         citiesTableView.delegate = self
         citiesTableView.dataSource = self
@@ -43,7 +48,6 @@ final class SearchViewController: UIViewController {
         view.addSubview(searchBar)
         view.addSubview(searchButton)
         view.addSubview(citiesTableView)
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillLayoutSubviews() {
@@ -53,7 +57,7 @@ final class SearchViewController: UIViewController {
         
         searchBar.frame = CGRect(x: 0, y: (self.navigationController?.navigationBar.frame.maxY)!, width: dd, height: 40)
         searchButton.frame = CGRect(x: searchBar.frame.maxX + 8, y: (self.navigationController?.navigationBar.frame.maxY)!, width: 78, height: 40)
-        citiesTableView.frame = CGRect(x: 0, y: 300, width: view.bounds.width, height: view.bounds.height - 70)
+        citiesTableView.frame = CGRect(x: 0, y: searchBar.frame.maxY + 2, width: view.bounds.width, height: view.bounds.height - 70)
     }
     
     
@@ -64,7 +68,7 @@ final class SearchViewController: UIViewController {
         
         let tmpVC = DetailsViewController()
         
-        self.navigationController?.pushViewController(tmpVC, animated: true)
+        self.navigationController?.pushViewController(tmpVC, animated: false)
     }
 
 }
