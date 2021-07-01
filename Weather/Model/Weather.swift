@@ -72,8 +72,70 @@ struct Fact: Codable {
     private(set) var condition: Condition
     ///Скорость ветра (в м/с)
     private(set) var windSpeed: Double
-    ///Облачность
+    ///Облачность в виде кода
     private(set) var cloudness: Double
+    
+    ///Расшифровка кода облачности
+    var cloudnessQ: String {
+        let tmp = "На небе "
+        
+        switch cloudness {
+        case 0:
+            return tmp + "ясно"
+        case 0.25:
+            return tmp + "малооблачно"
+        case 0.5, 0.75:
+            return tmp + "облачно с прояснениями"
+        case 1:
+            return tmp + "пасмурно"
+        default:
+            return ""
+        }
+    }
+    
+    ///Расшифровка погодного описания
+    var conditionQ: String {
+        switch condition {
+        case .clear:
+            return  "ясно"
+        case .partlyCloudy:
+            return "малооблачно"
+        case .cloudy:
+            return "облачно с прояснениями"
+        case .overcast:
+            return "пасмурно"
+        case .drizzle:
+            return  "морось"
+        case .lightRain:
+            return "небольшой дождь"
+        case .rain:
+            return "дождь"
+        case .moderateRain:
+            return "умеренно сильный дождь"
+        case .heavyRain:
+            return "сильный дождь"
+        case .continuousHeavyRain:
+            return "длительный сильный дождь"
+        case .showers:
+            return "ливень"
+        case .wetSnow:
+            return "дождь со снегом"
+        case .lightSnow:
+            return "небольшой снего"
+        case .snow:
+            return "снег"
+        case .snowShowers:
+            return "снегопад"
+        case .hail:
+            return "град"
+        case .thunderstorm:
+            return "гроза"
+        case .thunderstormWithRain:
+            return "дождь с грозой"
+        case .thunderstormWithHail:
+            return "гроза с градом"
+        }
+    }
     
 
     enum CodingKeys: String, CodingKey {

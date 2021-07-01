@@ -39,7 +39,7 @@ final class CityTableViewCell: UITableViewCell {
     var currentWeather: UILabel = {
         let label = UILabel()
         label.turnOffAutorecizingMask()
-        label.text = "ОБлачно на"
+        label.text = "Облачно на"
         return label
     }()
     

@@ -26,6 +26,8 @@ class DetailsViewController: UIViewController {
         label.font = UIFont.italicSystemFont(ofSize: 28)
         label.textColor = .secondaryLabel
         label.textAlignment = .center
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         label.turnOffAutorecizingMask()
         return label
     }()
@@ -70,73 +72,26 @@ class DetailsViewController: UIViewController {
         
         windSpeed.text = "ветер \(weather.fact.windSpeed) м/с"
         
-        let tmp = "На небе "
-        
-        switch weather.fact.cloudness {
-        case 0:
-            cloudness.text = tmp + "ясно"
-        case 0.25:
-            cloudness.text = tmp + "малооблачно"
-        case 0.5, 0.75:
-            cloudness.text = tmp + "облачно с прояснениями"
-        case 1:
-            cloudness.text = tmp + "пасмурно"
-        default:
-            cloudness.text = ""
-        }
-        
-        switch weather.fact.condition {
-        case .clear:
-            condition.text = "ясно"
-        case .partlyCloudy:
-            condition.text = "малооблачно"
-        case .cloudy:
-            condition.text = "облачно с прояснениями"
-        case .overcast:
-            condition.text = "пасмурно"
-        case .drizzle:
-            condition.text = "морось"
-        case .lightRain:
-            condition.text = "небольшой дождь"
-        case .rain:
-            condition.text = "дождь"
-        case .moderateRain:
-            condition.text = "умеренно сильный дождь"
-        case .heavyRain:
-            condition.text = "сильный дождь"
-        case .continuousHeavyRain:
-            condition.text = "длительный сильный дождь"
-        case .showers:
-            condition.text = "ливень"
-        case .wetSnow:
-            condition.text = "дождь со снегом"
-        case .lightSnow:
-            condition.text = "небольшой снего"
-        case .snow:
-            condition.text = "снег"
-        case .snowShowers:
-            condition.text = "снегопад"
-        case .hail:
-            condition.text = "град"
-        case .thunderstorm:
-            condition.text = "гроза"
-        case .thunderstormWithRain:
-            condition.text = "дождь с грозой"
-        case .thunderstormWithHail:
-            condition.text = "гроза с градом"
-        }
+        cloudness.text = weather.fact.cloudnessQ
+        condition.text = weather.fact.conditionQ
     }
     
+    ///Настройка констрейнтов
     private func setupLayout() {
         
         let nCmaxY = self.navigationController?.navigationBar.frame.maxY
-
+        condition.sizeToFit()
         [
             temp.topAnchor.constraint(equalTo: view.topAnchor, constant: nCmaxY ?? 64 + 8),
             temp.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             condition.topAnchor.constraint(equalTo: temp.bottomAnchor, constant: 14),
             condition.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            condition.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -14),
+            condition.heightAnchor.constraint(equalToConstant: 79),
+            condition.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 14),
+            condition.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -14),
+            
             
             windSpeed.topAnchor.constraint(equalTo: condition.bottomAnchor, constant: 14),
             windSpeed.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -145,6 +100,8 @@ class DetailsViewController: UIViewController {
             cloudness.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             
         ].forEach { $0.isActive = true }
+        
+        condition.sizeToFit()
     }
 }
 

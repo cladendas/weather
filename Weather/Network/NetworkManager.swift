@@ -21,8 +21,8 @@ final class NetworkManager {
         urlComponents.path = "/v2/forecast"
         
         urlComponents.queryItems = [
-            URLQueryItem(name: "lat", value: "45.048624"),
-            URLQueryItem(name: "lon", value: "38.985650")
+            URLQueryItem(name: "lat", value: lat),
+            URLQueryItem(name: "lon", value: lon)
         ]
         
         guard let url = urlComponents.url else { return nil }
@@ -30,16 +30,15 @@ final class NetworkManager {
         var request = URLRequest(url: url)
         
         request.allHTTPHeaderFields = ["X-Yandex-API-Key" : "b84bff10-a735-468b-8aac-e6729dd8d37f"]
-        
         return request
     }
     
     ///Выполненение запроса на получение данных о погоде
     ///- parameter lat: широта
     ///- parameter lon: долгота
-    static func performSearch(_ lon: String, _ lat: String, comlition: @escaping (_ weather: Weather) -> ()) {
+    static func performSearch(_ lat: String, _ lon: String, comlition: @escaping (_ weather: Weather) -> ()) {
         
-        guard let urlRequest = request(lon, lat) else {
+        guard let urlRequest = request(lat, lon) else {
             print("url request error")
             return
         }
@@ -50,9 +49,9 @@ final class NetworkManager {
                 print(error.localizedDescription)
             }
             
-            if let httpResponse = response as? HTTPURLResponse {
-                print("http status code: \(httpResponse.statusCode)")
-            }
+//            if let httpResponse = response as? HTTPURLResponse {
+//                print("http status code: \(httpResponse.statusCode)")
+//            }
             
             guard let data = data else {
                 print("no data received")

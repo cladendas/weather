@@ -11,13 +11,15 @@ import UIKit
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        ww.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CityTableViewCell", for: indexPath) as! CityTableViewCell
         
-        cell.name.text = "hjhjhjhjhj"
+        cell.name.text = ww[indexPath.row].geoObject.locality.name
+        cell.temperature.text = ww[indexPath.row].fact.temp.description
+        cell.currentWeather.text = ww[indexPath.row].fact.cloudnessQ.description
         
         return cell
     }
@@ -25,7 +27,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let tmpVC = DetailsViewController()
-        NetworkManager.performSearch("2121", "dfdsf") { [weak self] weather in
+        NetworkManager.performSearch(vv[indexPath.row][0], vv[indexPath.row][1]) { [weak self] weather in
             tmpVC.weather = weather
             
             DispatchQueue.main.async {

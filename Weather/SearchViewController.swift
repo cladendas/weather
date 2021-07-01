@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 final class SearchViewController: UIViewController {
     
@@ -48,7 +49,24 @@ final class SearchViewController: UIViewController {
         view.addSubview(searchBar)
         view.addSubview(searchButton)
         view.addSubview(citiesTableView)
+        
+        
+        for i in vv {
+            
+            NetworkManager.performSearch(i[0], i[1]) { weather in
+                DispatchQueue.main.async {
+                    self.ww.append(weather)
+                    self.citiesTableView.reloadData()
+                }
+            }
+        }
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    
+    var ww: [Weather] = []
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -64,6 +82,41 @@ final class SearchViewController: UIViewController {
     ///Действие при нажатии на кнопку поиска
     @objc
     private func search() {
+        geocoder(from: searchBar.text)
+    }
+    
+    let vv = [
+        ["59.9342562", "30.3351228"],
+        ["55.7615902", "37.60946"],
+        ["41.0117968", "28.9754277"],
+        ["42.9640162", "47.4991496"],
+        ["23.1359337", "-82.3475813"],
+        ["64.147208", "-21.9424"],
+        ["59.9115582", "10.7333611"],
+        ["-1.2871605", "36.8218219"],
+        ["55.7038574", "38.2249945"],
+        ["52.2866549", "104.2819267"],
+        ["64.7328563", "177.5078217"],
+    ]
+    
+    ///По названию местоположения возвращает широту и долготу в виде массива с двумя элементами
+    private func geocoder(from city: String) {
+        let geocoder = CLGeocoder()
         
+        geocoder.geocodeAddressString(city) { (placemarks, error) in
+            
+            let placemark = placemarks?.first
+            if
+                let lat = placemark?.location?.coordinate.latitude.description,
+                let lon = placemark?.location?.coordinate.longitude.description {
+
+                NetworkManager.performSearch(lat, lon) { weather in
+                    DispatchQueue.main.async {
+                        self.ww.append(weather)
+                        self.citiesTableView.reloadData()
+                    }
+                }
+            }
+        }
     }
 }
