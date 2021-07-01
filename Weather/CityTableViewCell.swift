@@ -6,15 +6,23 @@
 //
 
 import UIKit
+import WebKit
 
 final class CityTableViewCell: UITableViewCell {
     
     private let icon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "aligator")
+        
+        
+        var imageView = UIImageView()
+//        imageView.image = UIImage(named: "bkn_d")
+        
+        let url = "https://yastatic.net/weather/i/icons/blueye/color/svg/bkn_d.svg"
+//        imageView.kf.setImage(with: URL(string: "https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png"))
+        
         //растянет изображение по границе фрейма
         imageView.contentMode = .scaleAspectFit
         imageView.turnOffAutorecizingMask()
+        
         return imageView
     }()
     
@@ -22,6 +30,7 @@ final class CityTableViewCell: UITableViewCell {
         let label = UILabel()
         label.turnOffAutorecizingMask()
         label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 22)
 //        label.lineBreakMode = .byTruncatingTail
 //        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return label
@@ -30,17 +39,21 @@ final class CityTableViewCell: UITableViewCell {
     var currentWeather: UILabel = {
         let label = UILabel()
         label.turnOffAutorecizingMask()
+        label.text = "ОБлачно на"
         return label
     }()
     
     var temperature: UILabel = {
         let label = UILabel()
         label.turnOffAutorecizingMask()
+        label.textColor = .secondaryLabel
+        label.text = "28 C"
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         
         setupLayout()
     }
@@ -60,28 +73,36 @@ final class CityTableViewCell: UITableViewCell {
     
     func setupLayout() {
         
-        [icon, name, currentWeather, temperature].forEach { contentView.addSubview($0) }
+        [name, currentWeather, temperature].forEach { contentView.addSubview($0) }
         
 //        contentView.addSubview(name)
         
+//        var dd: Int {
+//            if Int(icon.image?.size.height ?? 54) >= Int(icon.image?.size.width ?? 54) {
+//                return Int(icon.image?.size.height ?? 54)
+//            } else {
+//                return Int(icon.image?.size.width ?? 54)
+//            }
+//        }
+        
         [
-            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: icon.image?.size.height ?? 13),
             
-            icon.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            icon.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            icon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-//            icon.widthAnchor.constraint(equalToConstant: contentView.frame.height / 2),
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 58),
             
-//            contentView.topAnchor.constraint(equalTo: topAnchor),
-//            contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
-//            contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
-//            contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            icon.heightAnchor.constraint(equalToConstant: 50),
+//            icon.widthAnchor.constraint(equalToConstant: 50),
+//            icon.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+//            icon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             
-//            name.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-//            name.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-//            name.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-//            name.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
-//            name.heightAnchor.constraint(greaterThanOrEqualToConstant: 57)
+            
+            name.centerYAnchor.constraint(equalTo: centerYAnchor),
+            name.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            
+            currentWeather.centerYAnchor.constraint(equalTo: centerYAnchor),
+            currentWeather.leadingAnchor.constraint(equalTo: name.trailingAnchor, constant: 8),
+            
+            temperature.centerYAnchor.constraint(equalTo: centerYAnchor),
+            temperature.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
             
         ].forEach { $0.isActive = true }
     }

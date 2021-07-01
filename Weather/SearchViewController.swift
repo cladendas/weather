@@ -64,11 +64,6 @@ final class SearchViewController: UIViewController {
     ///Действие при нажатии на кнопку поиска
     @objc
     private func search() {
-        print("tapped search button")
         
-        let tmpVC = DetailsViewController()
-        
-        self.navigationController?.pushViewController(tmpVC, animated: false)
     }
-
 }

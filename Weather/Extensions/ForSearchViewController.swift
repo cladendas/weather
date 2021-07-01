@@ -24,9 +24,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print("didSelectRow")
         let tmpVC = DetailsViewController()
-        
-        self.navigationController?.pushViewController(tmpVC, animated: false)
+        NetworkManager.performSearch("2121", "dfdsf") { [weak self] weather in
+            tmpVC.weather = weather
+            
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(tmpVC, animated: false)
+            }
+        }
     }
 }
